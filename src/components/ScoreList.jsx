@@ -17,19 +17,19 @@ const ScoreList = (props) => {
           В таблице рекордов пока нет записей!
         </div>
       ) : (
-        <div>
+        <>
           <ScoreItem place="Место" result="Счёт" date="Дата" />
           {scoreList.map((current, index) => {
             if (index === 5) {
               return (
-                <div className="flex-center" key={current.date}>
+                <>
                   <div>Последний результат</div>
                   <ScoreItem
                     place="..."
                     result={current.score}
                     date={parseDate(current.date)}
                   />
-                </div>
+                </>
               );
             }
             return (
@@ -41,7 +41,7 @@ const ScoreList = (props) => {
               />
             );
           })}
-        </div>
+        </>
       )}
     </div>
   );

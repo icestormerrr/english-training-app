@@ -23,7 +23,7 @@ const WordExercise = (props) => {
     }
   }, [seconds]);
 
-  // Сохранение результатов после окончания таймера
+  // Обработка результатов после окончания таймера
   function handleResult() {
     let newScoreList;
     // Если localStorage пустой и scoreList равен null

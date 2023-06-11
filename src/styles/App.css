@@ -27,7 +27,7 @@ body {
   min-height: 100vh;
   color: white;
   font-size: calc(10px + 2vmin);
-  gap: 20px;
+  gap: 40px;
   padding: 15px;
 }
 .App__main{

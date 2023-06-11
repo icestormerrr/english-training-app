@@ -50,10 +50,10 @@ function App() {
           <MyLoader />
         ) : (
           !isCounting && (
-            <div className="flex-center gap40">
+            <>
               <ScoreList />
               <MyButton onClick={startExercise}>Начать</MyButton>
-            </div>
+            </>
           )
         )}
         {isCounting && (
