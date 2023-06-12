@@ -18,13 +18,13 @@ const WordExercise = (props) => {
     if (seconds > 0 && props.isCounting) {
       setTimeout(setSeconds, 1000, seconds - 1);
     } else {
-      handleResult();
-      props.stopTimer(false);
+      saveResult();
+      props.setIsCounting(false);
     }
   }, [seconds]);
 
   // Обработка результатов после окончания таймера
-  function handleResult() {
+  function saveResult() {
     let newScoreList;
     // Если localStorage пустой и scoreList равен null
     if (!scoreList) {
@@ -63,8 +63,8 @@ const WordExercise = (props) => {
     let tempInputValue = inputValue;
     tempInputValue = tempInputValue.trim().toLowerCase();
     if (currentIndex === props.words.length - 1) {
-      handleResult();
-      props.stopTimer(false);
+      saveResult();
+      props.setIsCounting(false);
     } else if (tempInputValue === props.words[currentIndex].translate.toLowerCase()) {
       setScore(score + 1);
     } else {

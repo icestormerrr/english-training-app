@@ -17,19 +17,19 @@ function App() {
   );
   const [isLoading, setIsLoading] = useState(true);
 
-  async function getWordsFromServer() {
-    try {
-      const words = await WordService.getAll();
-      setWords(words);
-    } catch (e) {
-      alert(e.message);
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   useEffect(() => {
-    getWordsFromServer();
+    async function fetchWords() {
+      try {
+        const words = await WordService.getAll();
+        setWords(words);
+      } catch (e) {
+        alert(e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchWords();
   }, []);
 
   function startExercise() {
@@ -59,7 +59,7 @@ function App() {
           <WordExercise
             words={words}
             isCounting={isCounting}
-            stopTimer={setIsCounting}
+            setIsCounting={setIsCounting}
             localStorageKey={LOCAL_STORAGE_KEY}
           />
         )}
