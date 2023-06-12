@@ -6,7 +6,6 @@ import MyLoader from "./ui/loader/MyLoader";
 import WordExercise from "./components/WordExercise";
 import { ScoreListContext } from "./context";
 import ScoreList from "./components/ScoreList";
-import { shuffle } from "./utils/ArrayMethods";
 import * as ArrayMethods from "./utils/ArrayMethods";
 
 function App() {

@@ -31,3 +31,7 @@ WordExercise.jsx:
 ScoreList.jsx:
 - Displaying the final score and highlighting it in the leaderboard if it's in the top 5.
 
+## Design of application
+
+<img src="public/screenshot1.png">
+<img src="public/screenshot2.png">
