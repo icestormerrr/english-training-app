@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import MyInput from "../ui/input/MyInput";
-import MyButton from "../ui/button/MyButton";
-import WordCard from "./WordCard";
-import "../styles/App.css";
-import { ScoreListContext } from "../context";
+import MyInput from "../../ui/input/MyInput";
+import MyButton from "../../ui/button/MyButton";
+import WordCard from "../WordCard/WordCard";
+import styles from "./WordExercise.module.css";
+import { ScoreListContext } from "../../context";
 
 const WordExercise = (props) => {
   // Контекст, в котором хранятся 5 лучших попыток
@@ -75,13 +75,13 @@ const WordExercise = (props) => {
   }
 
   return (
-    <div className="WordExercise flex-center">
-      <div className="WordExercise__info">
+    <div className={styles.WordExercise}>
+      <div className={styles.WordExerciseInfo}>
         <p>Время: {seconds}</p>
         <p>Счёт: {score}</p>
       </div>
       <WordCard words={props.words} currentIndex={currentIndex} />
-      <form className="WordExercise__form flex-center">
+      <form className={styles.WordExerciseForm}>
         <MyInput
           type="text"
           value={inputValue}

@@ -1,11 +1,11 @@
-import "./styles/App.css";
+import "./App.css";
 import { useEffect, useState } from "react";
 import MyButton from "./ui/button/MyButton";
 import WordService from "./API/WordServise";
 import MyLoader from "./ui/loader/MyLoader";
-import WordExercise from "./components/WordExercise";
+import WordExercise from "./components/WordExercise/WordExercise";
 import { ScoreListContext } from "./context";
-import ScoreList from "./components/ScoreList";
+import ScoreList from "./components/ScoreList/ScoreList";
 import * as ArrayMethods from "./utils/ArrayMethods";
 
 function App() {

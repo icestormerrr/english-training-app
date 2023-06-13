@@ -1,9 +1,8 @@
-import "../styles/App.css";
 import React from "react";
-
+import styles from "./WordCard.module.css"
 const WordCard = (props) => {
   return (
-    <div className="WordCard flex-center">
+    <div className={styles.WordCard}>
       {props.words[props.currentIndex].word}
     </div>
   );

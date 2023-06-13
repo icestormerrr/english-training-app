@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
-import { ScoreListContext } from "../context";
-import ScoreItem from "./ScoreItem";
+import React, { useContext } from "react";
+import { ScoreListContext } from "../../context";
+import ScoreItem from "../ScoreItem/ScoreItem";
+import styles from "./ScoreList.module.css"
 import moment from "moment";
 
 const ScoreList = (props) => {
@@ -11,9 +12,9 @@ const ScoreList = (props) => {
   }
 
   return (
-    <div className="ScoreList">
+    <div className={styles.ScoreList}>
       {!scoreList?.length ? (
-        <div className="flex-center">
+        <div className={styles.flexCenter}>
           В таблице рекордов пока нет записей!
         </div>
       ) : (
@@ -22,7 +23,7 @@ const ScoreList = (props) => {
           {scoreList.map((current, index) => {
             if (index === 5) {
               return (
-                <div className="flex-center" key={current.date}>
+                <div className={styles.flexCenter} key={current.date}>
                   <div>Последний результат</div>
                   <ScoreItem
                     place="..."
