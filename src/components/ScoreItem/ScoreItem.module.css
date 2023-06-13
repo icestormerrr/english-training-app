@@ -1,0 +1,19 @@
+.ScoreItem {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: 100px 100px auto;
+    margin: 20px;
+}
+.ScoreItemContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    word-spacing: 5px;
+}
+@media (max-width: 650px) {
+    .ScoreItem {
+        gap: 40px;
+        grid-template-columns: 60px 60px auto;
+    }
+}
