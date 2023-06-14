@@ -1,12 +1,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import MyButton from "./ui/button/MyButton";
+import Button from "./ui/button/Button";
 import WordService from "./API/WordServise";
-import MyLoader from "./ui/loader/MyLoader";
+import Loader from "./ui/loader/Loader";
 import WordExercise from "./components/WordExercise/WordExercise";
 import { ScoreListContext } from "./context";
 import ScoreList from "./components/ScoreList/ScoreList";
-import * as ArrayMethods from "./utils/ArrayMethods";
+import shuffle from "./utils/shuffle";
 
 function App() {
   const LOCAL_STORAGE_KEY = "LOCAL_STORAGE_KEY";
@@ -33,9 +33,13 @@ function App() {
   }, []);
 
   function startExercise() {
-    setWords(ArrayMethods.shuffle(words));
+    setWords(shuffle(words));
     setIsCounting(true);
   }
+
+  const handleCountingChange = (value) => {
+    setIsCounting(value);
+  };
 
   return (
     <ScoreListContext.Provider
@@ -44,14 +48,14 @@ function App() {
         setScoreList,
       }}
     >
-      <div className="App flex-center">
+      <div className="app">
         {isLoading ? (
-          <MyLoader />
+          <Loader />
         ) : (
           !isCounting && (
             <>
               <ScoreList />
-              <MyButton onClick={startExercise}>Начать</MyButton>
+              <Button onClick={startExercise}>Начать</Button>
             </>
           )
         )}
@@ -59,7 +63,7 @@ function App() {
           <WordExercise
             words={words}
             isCounting={isCounting}
-            setIsCounting={setIsCounting}
+            onEndOfExercise={handleCountingChange}
             localStorageKey={LOCAL_STORAGE_KEY}
           />
         )}

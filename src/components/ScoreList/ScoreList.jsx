@@ -4,15 +4,15 @@ import ScoreItem from "../ScoreItem/ScoreItem";
 import styles from "./ScoreList.module.css"
 import moment from "moment";
 
-const ScoreList = (props) => {
-  const { scoreList, setScoreList } = useContext(ScoreListContext);
+const ScoreList = () => {
+  const { scoreList } = useContext(ScoreListContext);
 
   function parseDate(dateStr) {
     return moment(dateStr).format("DD.MM.YY HH:mm:ss");
   }
 
   return (
-    <div className={styles.ScoreList}>
+    <div className={styles.container}>
       {!scoreList?.length ? (
         <div className={styles.flexCenter}>
           В таблице рекордов пока нет записей!

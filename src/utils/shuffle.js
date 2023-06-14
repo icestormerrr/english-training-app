@@ -1,4 +1,4 @@
-export const shuffle = (array) => {
+const shuffle = (array) => {
   let m = array.length, t, i;
   while (m) {
     i = Math.floor(Math.random() * m--);
@@ -8,4 +8,6 @@ export const shuffle = (array) => {
   }
   return array;
 }
+
+export default shuffle;
 

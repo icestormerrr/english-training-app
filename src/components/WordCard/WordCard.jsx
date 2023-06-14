@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./WordCard.module.css"
-const WordCard = (props) => {
+const WordCard = ({word}) => {
   return (
-    <div className={styles.WordCard}>
-      {props.words[props.currentIndex].word}
+    <div className={styles.card}>
+      {word}
     </div>
   );
 };

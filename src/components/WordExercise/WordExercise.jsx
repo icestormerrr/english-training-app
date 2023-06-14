@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import MyInput from "../../ui/input/MyInput";
-import MyButton from "../../ui/button/MyButton";
+import Input from "../../ui/input/Input";
+import Button from "../../ui/button/Button";
 import WordCard from "../WordCard/WordCard";
 import styles from "./WordExercise.module.css";
 import { ScoreListContext } from "../../context";
+import getNewScoreList from "../../utils/getNewScoreList";
 
-const WordExercise = (props) => {
+const WordExercise = ({words, isCounting, onEndOfExercise, localStorageKey}) => {
   // Контекст, в котором хранятся 5 лучших попыток
   const { scoreList, setScoreList } = useContext(ScoreListContext);
   const [inputValue, setInputValue] = useState("");
@@ -15,57 +16,32 @@ const WordExercise = (props) => {
 
   // Логика работы таймера
   useEffect(() => {
-    if (seconds > 0 && props.isCounting) {
-      setTimeout(setSeconds, 1000, seconds - 1);
+    let timerId;
+    if (seconds > 0 && isCounting) {
+      timerId = setTimeout(setSeconds, 1000, seconds - 1);
     } else {
-      saveResult();
-      props.setIsCounting(false);
+      // Сохранение результатов
+      setScoreList(getNewScoreList(scoreList, score));
+      localStorage.setItem(localStorageKey, JSON.stringify(scoreList));
+      onEndOfExercise(false);
+    }
+    return () => {
+      clearTimeout(timerId)
     }
   }, [seconds]);
 
-  // Обработка результатов после окончания таймера
-  function saveResult() {
-    let newScoreList;
-    // Если localStorage пустой и scoreList равен null
-    if (!scoreList) {
-      newScoreList = [{ score: score, date: Date.now() }];
-    }
-    // Если scoreList не заполнен до конца
-    else if (scoreList.length < 5) {
-      newScoreList = scoreList;
-      newScoreList.push({ score: score, date: Date.now() });
-      newScoreList.sort((a, b) => (a.score < b.score ? 1 : -1));
-    }
-    // Если scoreList заполнен
-    else {
-      newScoreList = scoreList;
-      // Я храню последюю попытку в scoreList[5], если она не вошла в топ пять
-      // Поэтому эту позицию нужно очищать
-      if (scoreList.length === 6) {
-        newScoreList.pop();
-      }
-      // Если лучше, хотя бы чем последний, значит заменяем последний на текущий и сортируем
-      if (score > newScoreList.at(-1).score) {
-        newScoreList.pop();
-        newScoreList.push({ score: score, date: Date.now() });
-        newScoreList.sort((a, b) => (a.score < b.score ? 1 : -1));
-      } else {
-        newScoreList.push({ score: score, date: Date.now() });
-      }
-    }
-    setScoreList(newScoreList);
-    localStorage.setItem(props.localStorageKey, JSON.stringify(scoreList));
-  }
 
   // Логика игры
   function checkAnswer(event) {
     event.preventDefault();
     let tempInputValue = inputValue;
     tempInputValue = tempInputValue.trim().toLowerCase();
-    if (currentIndex === props.words.length - 1) {
-      saveResult();
-      props.setIsCounting(false);
-    } else if (tempInputValue === props.words[currentIndex].translate.toLowerCase()) {
+    if (currentIndex === words.length - 1) {
+      // Сохранение результатов
+      setScoreList(getNewScoreList(scoreList, score));
+      localStorage.setItem(localStorageKey, JSON.stringify(scoreList));
+      onEndOfExercise(false);
+    } else if (tempInputValue === words[currentIndex].translate.toLowerCase()) {
       setScore(score + 1);
     } else {
       setScore(score - 1);
@@ -75,20 +51,20 @@ const WordExercise = (props) => {
   }
 
   return (
-    <div className={styles.WordExercise}>
-      <div className={styles.WordExerciseInfo}>
+    <div className={styles.container}>
+      <div className={styles.info}>
         <p>Время: {seconds}</p>
         <p>Счёт: {score}</p>
       </div>
-      <WordCard words={props.words} currentIndex={currentIndex} />
-      <form className={styles.WordExerciseForm}>
-        <MyInput
+      <WordCard word={words[currentIndex].word} />
+      <form className={styles.form}>
+        <Input
           type="text"
           value={inputValue}
           placeholder="Введите перевод"
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <MyButton onClick={(e) => checkAnswer(e)}>Подтвердить</MyButton>
+        <Button onClick={(e) => checkAnswer(e)}>Подтвердить</Button>
       </form>
     </div>
   );
