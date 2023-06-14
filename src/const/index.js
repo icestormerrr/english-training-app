@@ -1,0 +1,2 @@
+export const LOCAL_STORAGE_KEY = "LOCAL_STORAGE_KEY";
+export const TOP_RESULT_COUNT = 5;

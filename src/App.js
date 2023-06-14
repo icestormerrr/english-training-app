@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Button from "./ui/button/Button";
-import WordService from "./API/WordServise";
+import WordService from "./API/WordService";
 import Loader from "./ui/loader/Loader";
 import WordExercise from "./components/WordExercise/WordExercise";
 import { ScoreListContext } from "./context";
@@ -62,9 +62,7 @@ function App() {
         {isCounting && (
           <WordExercise
             words={words}
-            isCounting={isCounting}
-            onEndOfExercise={handleCountingChange}
-            localStorageKey={LOCAL_STORAGE_KEY}
+            changeIsCounting={handleCountingChange}
           />
         )}
       </div>

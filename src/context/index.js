@@ -1,3 +1,6 @@
-import {createContext} from 'react'
+import { createContext } from "react";
 
-export const ScoreListContext = createContext({scoreList:[]});
+export const ScoreListContext = createContext({
+  scoreList: [],
+  setScoreList: () => {},
+});
