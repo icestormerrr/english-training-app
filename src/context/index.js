@@ -1,3 +1,3 @@
 import {createContext} from 'react'
 
-export const ScoreListContext = createContext(null);
+export const ScoreListContext = createContext({scoreList:[]});
