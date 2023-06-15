@@ -8,7 +8,7 @@ import getNewScoreList from "../../utils/getNewScoreList";
 import {LOCAL_STORAGE_KEY} from "../../const";
 import CountDown from "../CountDown/CountDown";
 
-const WordExercise = ({words, changeIsCounting}) => {
+const WordExercise = ({words, navigate}) => {
   // Контекст, в котором хранятся 5 лучших попыток
   const { scoreList, setScoreList } = useContext(ScoreListContext);
   const [inputValue, setInputValue] = useState("");
@@ -19,7 +19,7 @@ const WordExercise = ({words, changeIsCounting}) => {
     const newScoreList = getNewScoreList(scoreList, score)
     setScoreList(newScoreList);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newScoreList));
-    changeIsCounting(false);
+    navigate("/");
   }
 
   function checkAnswer(event) {
