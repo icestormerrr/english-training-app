@@ -1,8 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import WordService from "./API/WordService";
-import { ScoreListContext } from "./context";
-import shuffle from "./utils/shuffle";
+import { AppContext } from "./context";
 import { LOCAL_STORAGE_KEY } from "./const";
 import {
   Navigate,
@@ -14,7 +13,6 @@ import Exercise from "./pages/Exercise/Exercise";
 
 function App() {
   const [words, setWords] = useState([{ word: "", translate: "" }]);
-
   const [scoreList, setScoreList] = useState(
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
   );
@@ -34,14 +32,11 @@ function App() {
     fetchWords();
   }, []);
 
-  function shuffleWords() {
-    const newWords = shuffle(words);
-    setWords(newWords);
-  }
 
   return (
-    <ScoreListContext.Provider
+    <AppContext.Provider
       value={{
+        words,
         scoreList,
         setScoreList,
       }}
@@ -50,12 +45,12 @@ function App() {
         <Route
           path="/"
           exact
-          element={<Home isLoading={isLoading} shuffleWords={shuffleWords} />}
+          element={<Home isLoading={isLoading} />}
         />
         <Route path="/exercise" element={<Exercise words={words} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </ScoreListContext.Provider>
+    </AppContext.Provider>
   );
 }
 

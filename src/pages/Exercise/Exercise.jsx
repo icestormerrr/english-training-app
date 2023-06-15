@@ -1,10 +1,9 @@
-import React from "react";
 import styles from "./Exercise.module.css";
 import WordExercise from "../../components/WordExercise/WordExercise";
-const Exercise = ({ words }) => {
+const Exercise = () => {
   return (
     <div className={styles.container}>
-      <WordExercise words={words} />
+      <WordExercise />
     </div>
   );
 };

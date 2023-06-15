@@ -4,11 +4,10 @@ import ScoreList from "../../components/ScoreList/ScoreList";
 import Button from "../../ui/button/Button";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({ shuffleWords, isLoading }) => {
+const Home = ({ isLoading }) => {
   const navigate = useNavigate();
   function startExercise() {
     navigate("/exercise");
-    shuffleWords();
   }
   return (
     <div className={styles.container}>

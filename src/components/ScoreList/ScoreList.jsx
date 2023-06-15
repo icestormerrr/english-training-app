@@ -1,15 +1,12 @@
 import React, { useContext } from "react";
-import { ScoreListContext } from "../../context";
+import { AppContext } from "../../context";
 import ScoreItem from "../ScoreItem/ScoreItem";
 import styles from "./ScoreList.module.css"
-import moment from "moment";
+import { TOP_RESULT_COUNT } from "../../const";
+import parseDate from "../../utils/parseDate";
 
 const ScoreList = () => {
-  const { scoreList } = useContext(ScoreListContext);
-
-  function parseDate(dateStr) {
-    return moment(dateStr).format("DD.MM.YY HH:mm:ss");
-  }
+  const { scoreList } = useContext(AppContext);
 
   return (
     <div className={styles.container}>
@@ -21,7 +18,7 @@ const ScoreList = () => {
         <>
           <ScoreItem place="Место" result="Счёт" date="Дата" />
           {scoreList.map((current, index) => {
-            if (index === 5) {
+            if (index === TOP_RESULT_COUNT) {
               return (
                 <div className={styles.flexCenter} key={current.date}>
                   <div>Последний результат</div>
