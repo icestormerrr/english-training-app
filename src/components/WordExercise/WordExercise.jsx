@@ -5,18 +5,19 @@ import WordCard from "../WordCard/WordCard";
 import styles from "./WordExercise.module.css";
 import { ScoreListContext } from "../../context";
 import getNewScoreList from "../../utils/getNewScoreList";
-import {LOCAL_STORAGE_KEY} from "../../const";
+import { LOCAL_STORAGE_KEY } from "../../const";
 import CountDown from "../CountDown/CountDown";
+import { useNavigate } from "react-router-dom";
 
-const WordExercise = ({words, navigate}) => {
+const WordExercise = ({ words }) => {
   // Контекст, в котором хранятся 5 лучших попыток
   const { scoreList, setScoreList } = useContext(ScoreListContext);
   const [inputValue, setInputValue] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
-
+  const navigate = useNavigate();
   function saveResult() {
-    const newScoreList = getNewScoreList(scoreList, score)
+    const newScoreList = getNewScoreList(scoreList, score);
     setScoreList(newScoreList);
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newScoreList));
     navigate("/");
@@ -39,7 +40,9 @@ const WordExercise = ({words, navigate}) => {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <p>Время: <CountDown seconds={5} onEndCounting={saveResult}/></p>
+        <p>
+          Время: <CountDown seconds={5} onEndCounting={saveResult} />
+        </p>
         <p>Счёт: {score}</p>
       </div>
       <WordCard word={words[currentIndex].word} />
