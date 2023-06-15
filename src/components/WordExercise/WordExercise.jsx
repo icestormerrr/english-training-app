@@ -41,7 +41,6 @@ const WordExercise = ({ words }) => {
   window.onload = function() {
     let loaded = sessionStorage.getItem('loaded');
     if(loaded) {
-      saveResult();
       navigate("/")
     } else {
       sessionStorage.setItem('loaded', true);
