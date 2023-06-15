@@ -37,11 +37,23 @@ const WordExercise = ({ words }) => {
     setCurrentIndex((prevCurrentIndex) => prevCurrentIndex + 1);
   }
 
+  // Костыль?
+  window.onload = function() {
+    let loaded = sessionStorage.getItem('loaded');
+    if(loaded) {
+      saveResult();
+      navigate("/")
+    } else {
+      sessionStorage.setItem('loaded', true);
+    }
+  }
+
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
         <p>
-          Время: <CountDown seconds={5} onEndCounting={saveResult} />
+          Время: <CountDown seconds={60} onEndCounting={saveResult} />
         </p>
         <p>Счёт: {score}</p>
       </div>
