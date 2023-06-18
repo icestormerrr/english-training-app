@@ -47,7 +47,7 @@ function App() {
           exact
           element={<Home isLoading={isLoading} />}
         />
-        <Route path="/exercise" element={<Exercise words={words} />} />
+        <Route path="/exercise" element={<Exercise />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </AppContext.Provider>

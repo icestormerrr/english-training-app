@@ -32,9 +32,7 @@ const WordExercise = () => {
     let tempInputValue = inputValue.trim().toLowerCase();
     if (currentIndex === shuffledWords.length - 1) {
       saveResult();
-    } else if (
-      tempInputValue === shuffledWords[currentIndex].translate.toLowerCase()
-    ) {
+    } else if (tempInputValue === shuffledWords[currentIndex].translate.toLowerCase()) {
       setScore((prevScore) => prevScore + 1);
     } else {
       setScore((prevScore) => prevScore - 1);
