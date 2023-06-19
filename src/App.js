@@ -13,7 +13,7 @@ import Exercise from "./pages/Exercise/Exercise";
 
 function App() {
   const [words, setWords] = useState([{ word: "", translate: "" }]);
-  const [scoreList, setScoreList] = useState(
+  const [scoreList, setScoreList] = useState( () =>
     JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
   );
   const [isLoading, setIsLoading] = useState(true);
