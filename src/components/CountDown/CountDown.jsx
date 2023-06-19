@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
-const CountDown = (props) => {
-  const [seconds, setSeconds] = useState(props.seconds);
+const CountDown = ({ initialSeconds, onEndCounting }) => {
+  const [seconds, setSeconds] = useState(initialSeconds);
   useEffect(() => {
     let timerId;
     if (seconds > 0) {
       timerId = setTimeout(setSeconds, 1000, seconds - 1);
     } else {
-      props.onEndCounting();
+      onEndCounting();
     }
     return () => {
       clearTimeout(timerId)

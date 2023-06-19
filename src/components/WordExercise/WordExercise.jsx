@@ -45,7 +45,7 @@ const WordExercise = () => {
     <div className={styles.container}>
       <div className={styles.info}>
         <p>
-          Время: <CountDown seconds={60} onEndCounting={saveResult} />
+          Время: <CountDown initialSeconds={60} onEndCounting={saveResult} />
         </p>
         <p>Счёт: {score}</p>
       </div>
